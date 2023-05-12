@@ -1,5 +1,10 @@
 <script setup></script>
 <template>
-    我是home
+    <div>我是home</div>
+    
 </template>
-<style scoped></style>
+<style scoped>
+div {
+    height: 1200px;
+}
+</style>
