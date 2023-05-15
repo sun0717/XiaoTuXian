@@ -1,7 +1,6 @@
 import httpInstance from '@/utils/http'
 
 // 获取 banner
-
 export function getBannerAPI() {
     return httpInstance({
         url: '/home/banner'
@@ -16,5 +15,11 @@ export function getBannerAPI() {
 export const findNewAPI = () => {
     return httpInstance({
       url:'/home/new'
+    })
+}
+
+export const getHotAPI = () => {
+    return httpInstance({
+        url:'/home/hot'
     })
 }
