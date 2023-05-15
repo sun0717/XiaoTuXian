@@ -11,7 +11,6 @@ import HomeProduct from './components/HomeProduct.vue'
         <HomeBanner />
     </div>
     <HomeNew />
-    <HomeNew />
     <HomeHot />
     <HomeProduct />
     <!-- <HomePanel title="新鲜好物" sub-title="新鲜好物 好多商品">
@@ -26,7 +25,7 @@ import HomeProduct from './components/HomeProduct.vue'
     </HomePanel> -->
 </template>
 <style scoped>
-div {
+/* div {
     height: 1200px;
-}
+} */
 </style>
