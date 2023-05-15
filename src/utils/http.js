@@ -15,5 +15,6 @@ httpInstance.interceptors.request.use(config => {
 httpInstance.interceptors.response.use(res => res.data, e => {
     return Promise.reject(e)
 })
+
 // 拦截器
 export default httpInstance
