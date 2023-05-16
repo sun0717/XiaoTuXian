@@ -2,6 +2,7 @@
 import { getDetail } from '@/apis/detail'
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
+import ImageView from '@/components/ImageView/index.vue'
 import DetailHot from './components/DetailHot.vue';
 const goods = ref({})
 const route = useRoute()
@@ -14,7 +15,6 @@ const getGoods = async () => {
 onMounted(() => getGoods())
 
 </script>
-<!-- `/category/${goods.categories[1].id}` -->
 <template>
     <div class="xtx-goods-page">
         <div class="container" v-if="goods.details">
@@ -34,7 +34,7 @@ onMounted(() => getGoods())
                     <div class="goods-info">
                         <div class="media">
                             <!-- 图片预览区 -->
-
+                            <ImageView />
                             <!-- 统计数量 -->
                             <ul class="goods-sales">
                                 <li>
