@@ -10,7 +10,7 @@ import Detail from '@/views/Detail/index.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  scrollBehavior(to, from, savedPosition) {
+  scrollBehavior() {
     // 始终滚动到顶部
     return { top: 0 }
   },
