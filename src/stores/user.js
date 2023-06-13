@@ -9,7 +9,7 @@ export const useUserStore = defineStore('user', () => {
     })
     // 2. 定义获取接口数据的action函数
     const getUserInfo = async ({ account, password }) => {
-        const res = loginAPI({ account, password })
+        const res = await loginAPI({ account, password })
         userInfo.value = res.result
     }
     // 3. 以对象的格式把 state 和 action return 
