@@ -35,19 +35,33 @@ export const useCartStore = defineStore('cart', () => {
         const item = cartList.value.find((item) => item.skuId === skuId);
         item.selected = selected;
     }
+
+    // 列表购物车-全选
+
+    // 核心思路：
+    // 1、操作单选决定全选：只有当cartList的所有项都为true时，全选状态才为true
+    // 2、操作全选决定单选：cartList 中的所有项的 selecte 都要跟着一起变
+    const allCheck = (selected) => {
+        // 通过skuId找到要修改的那一项，然后把它的selected修改为传过来的selected
+        cartList.value.forEach(item => item.selected = selected)
+    }
     // 计算属性
     // 1. 总的数量 所有项的count之和
     const allCount = computed(() => cartList.value.reduce((a, c) => a + c.count, 0))
     // 2. 总价     所有项的count*price之和
     const allPrice = computed(() => cartList.value.reduce((a, c) => a + c.count * c.price, 0))
 
+    // 是否全选
+    const isAll = computed(() => cartList.value.every((item) => item.selected))
     return {
         cartList,
         addCart,
         delCart,
         allCount,
         allPrice,
-        singleCheck 
+        singleCheck,
+        isAll,
+        allCheck
     }
 }, {
     persist: true
