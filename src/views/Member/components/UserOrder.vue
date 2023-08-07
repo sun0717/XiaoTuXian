@@ -16,26 +16,26 @@ const tabTypes = [
 const orderList = ref([])
 const total = ref(0)
 const params = ref({
-    orderState: 0,
-    page: 1,
-    pageSize: 2
+  orderState: 0,
+  page: 1,
+  pageSize: 2
 })
 
 const getOrderList = async () => {
-    const res = await getUserOrder(params.value);
-    orderList.value = res.result.items;
-    total.value = res.result.counts;
+  const res = await getUserOrder(params.value);
+  orderList.value = res.result.items;
+  total.value = res.result.counts;
 }
 
 onMounted(() => {
-    getOrderList()
+  getOrderList()
 })
 
 // tab切换
 const tabChange = (type) => {
-    console.log(type);
-    params.value.orderState = type;
-    getOrderList();
+  console.log(type);
+  params.value.orderState = type;
+  getOrderList();
 }
 
 // 页数切换
@@ -44,13 +44,26 @@ const pageChange = (page) => {
   params.value.page = page;
   getOrderList();
 }
+
+// 创建格式化函数
+const fomartPayState = (payState) => {
+  const stateMap = {
+    1: '待付款',
+    2: '待发货',
+    3: '待收货',
+    4: '待评价',
+    5: '已完成',
+    6: '已取消'
+  }
+  return stateMap[payState]
+}
 </script>
 
 <template>
   <div class="order-container">
     <el-tabs @tab-change="tabChange">
       <!-- tab切换 -->
-      <el-tab-pane v-for="item in tabTypes" :key="item.name" :label="item.label"/>
+      <el-tab-pane v-for="item in tabTypes" :key="item.name" :label="item.label" />
 
       <div class="main-container">
         <div class="holder-container" v-if="orderList.length === 0">
@@ -65,7 +78,7 @@ const pageChange = (page) => {
               <!-- 未付款，倒计时时间还有 -->
               <span class="down-time" v-if="order.orderState === 1">
                 <i class="iconfont icon-down-time"></i>
-                <b>付款截止: {{order.countdown}}</b>
+                <b>付款截止: {{ order.countdown }}</b>
               </span>
             </div>
             <div class="body">
@@ -89,7 +102,7 @@ const pageChange = (page) => {
                 </ul>
               </div>
               <div class="column state">
-                <p>{{ order.orderState }}</p>
+                <p>{{ fomartPayState(order.orderState) }}</p>
                 <p v-if="order.orderState === 3">
                   <a href="javascript:;" class="green">查看物流</a>
                 </p>
@@ -106,8 +119,7 @@ const pageChange = (page) => {
                 <p>在线支付</p>
               </div>
               <div class="column action">
-                <el-button  v-if="order.orderState === 1" type="primary"
-                  size="small">
+                <el-button v-if="order.orderState === 1" type="primary" size="small">
                   立即付款
                 </el-button>
                 <el-button v-if="order.orderState === 3" type="primary" size="small">
@@ -126,14 +138,14 @@ const pageChange = (page) => {
           </div>
           <!-- 分页 -->
           <div class="pagination-container">
-            <el-pagination :total="total" @current-change="pageChange" :page-size="params.pageSize" background layout="prev, pager, next" />
+            <el-pagination :total="total" @current-change="pageChange" :page-size="params.pageSize" background
+              layout="prev, pager, next" />
           </div>
         </div>
       </div>
 
     </el-tabs>
   </div>
-
 </template>
 
 <style scoped lang="scss">
